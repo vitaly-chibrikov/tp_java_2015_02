@@ -1,0 +1,14 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Авторизация</title>
+</head>
+<body>
+	<form action = "/authform" method = "GET">
+	Логин: <input type="text" name="login" />
+	<input type="submit" value="Отправить">
+	</form>
+
+    <p>Предыдущий логин: ${lastLogin}</p>
+
+</body>
+</html>
