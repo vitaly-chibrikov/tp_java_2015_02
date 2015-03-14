@@ -1,9 +1,10 @@
 package example;
 
-import AccountServer.AccountServer;
-import AccountServer.AccountServerController;
-import AccountServer.AccountServerControllerMBean;
-import AccountServer.HomePageServlet;
+import accountServer.AccountServer;
+import accountServer.AccountServerController;
+import accountServer.AccountServerControllerMBean;
+import accountServer.AccountServerI;
+import servlets.HomePageServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Handler;
@@ -31,7 +32,7 @@ public class Main {
 
         logger.info("Starting at http://127.0.0.1:" + portString);
 
-        AccountServer accountServer = new AccountServer(1);
+        AccountServerI accountServer = new AccountServer(1);
 
         AccountServerControllerMBean serverStatistics = new AccountServerController(accountServer);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
@@ -40,7 +41,7 @@ public class Main {
 
         Server server = new Server(port);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.url);
+        context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.PAGE_URL);
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
